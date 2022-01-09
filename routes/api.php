@@ -34,7 +34,5 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('logout', [AuthController::class, 'logout']);
     });
 
-    Route::group()
-
     
 });
