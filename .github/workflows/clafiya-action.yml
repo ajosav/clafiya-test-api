@@ -33,3 +33,33 @@ jobs:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
       run: vendor/bin/phpunit
+    
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout
+
+      uses: actions/checkout@v2
+
+    - name: Deployment
+
+      uses: appleboy/ssh-action@main
+
+      with:
+
+        host: ${{ secrets.CLAFIYA_SSH_HOST }}
+
+        key: ${{ secrets.CLAFIYA_PRIVATE_KEY }}
+
+        username: ${{ secrets.CLAFIYA_SSH_USERNAME }}
+
+        script: |
+
+          cd /var/www/html/
+
+          git checkout -f 
+
+          git pull
