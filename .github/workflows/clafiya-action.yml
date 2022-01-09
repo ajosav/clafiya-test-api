@@ -58,7 +58,7 @@ jobs:
 
         script: |
 
-          cd /var/www/html/
+          cd /var/www/clafiya-test-api
 
           git checkout -f 
 
