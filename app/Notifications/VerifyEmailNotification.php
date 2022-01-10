@@ -89,7 +89,7 @@ class VerifyEmailNotification extends Notification
             return call_user_func(static::$createUrlCallback, $notifiable);
         }
 
-        $id = $notifiable->getRouteKeyName();
+        $id = $notifiable->encodedKey;
         $hash = sha1($notifiable->getEmailForVerification());
         $base_verification_link = config('external.verification_link');
         $expires = encrypt(Carbon::now()->addMinutes(Config::get('auth.verification.expire', 60)));

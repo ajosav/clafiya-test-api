@@ -22,7 +22,7 @@ class VerifyEmailRequest extends EmailVerificationRequest
     public function authorize()
     {
         if ($this->filled('id') && ! hash_equals((string) $this->input('id'),
-                    (string) $this->user()->getRouteKeyName())) {
+                    (string) $this->user()->encodedKey)) {
             throw new ClafiyaException('Access Denied! Invalid Verification ID', 403);
         }
 
