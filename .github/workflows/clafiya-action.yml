@@ -64,4 +64,4 @@ jobs:
 
           sudo git pull
           
-          sudo ./.scripts/deploy.sh
+          sudo cd /var/www/clafiya-test-api && ./.scripts/deploy.sh
