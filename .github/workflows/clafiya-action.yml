@@ -33,13 +33,17 @@ jobs:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
       run: vendor/bin/phpunit
-    
+    - name: Clear the old cache
+      run: php artisan clear-compiled
+    - name: Run database migrations
+      run: php artisan migrate --force
+
   deploy:
 
     runs-on: ubuntu-latest
 
     steps:
-
+    
     - name: Checkout
 
       uses: actions/checkout@v2
@@ -63,5 +67,3 @@ jobs:
           sudo git checkout -f 
 
           sudo git pull
-          
-          sudo cd /var/www/clafiya-test-api && ./.scripts/deploy.sh
