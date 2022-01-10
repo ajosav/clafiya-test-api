@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\Auth\AuthController;
 use App\Http\Controllers\Api\V1\Auth\LoginController;
 use App\Http\Controllers\Api\V1\Auth\RegisterController;
+use App\Http\Controllers\Api\V1\MiscellaneousController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,10 @@ Route::group(['prefix' => 'v1'], function () {
         Route::post('/forgot-password', [PasswordResetController::class, 'forgotPassword'])->name('password.request');
         Route::post('/reset-password', [PasswordResetController::class, 'resetPassword']);
         Route::get('logout', [AuthController::class, 'logout']);
+    });
+
+    Route::name('misc')->prefix('misc')->middleware(['auth:api', 'verified_email'])->group(function () {
+        Route::get('get-a-quote', [MiscellaneousController::class, 'getAQuote']);
     });
 
     

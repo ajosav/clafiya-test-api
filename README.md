@@ -16,8 +16,6 @@ As instructed, the API was written in Laravel (a PHP Framework), deployed on AWS
 
 This API uses OAuth2 Password Grant Type to authenticate users (Powered by Laravel Passport). It typically generates an access token using a given username and password.
 
-## Project Setup(Web Portal)
-
 ### Cloning the GitHub Repository.
 Clone the repository to your local machine by running the terminal command below.
 
