@@ -17,7 +17,7 @@ class PassportUtil
 
     public function respondWithToken(array $data) 
     {
-        $response = Http::asForm()->post('http://clafiya-api.test/oauth/token', $data);
+        $response = Http::asForm()->post(url('/oauth/token'), $data);
         return $response->failed() ? false : $response->json();
     }
 
