@@ -60,6 +60,8 @@ jobs:
 
           cd /var/www/clafiya-test-api
 
-          git checkout -f 
+          sudo git checkout -f 
 
-          git pull
+          sudo git pull
+          
+          cd /var/www/clafiya-test-api && ./.scripts/deploy.sh"
