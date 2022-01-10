@@ -41,7 +41,7 @@ class LoginRequest extends FormRequest
 
         if(!$user)
             throw ValidationException::withMessages([
-                $this->username() => "Either the " . $this->username() . " or password provided does not match",
+                $fieldType => "Either the " . $fieldType . " or password provided does not match",
             ]);
 
         Cache::put($username, $user);
