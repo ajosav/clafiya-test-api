@@ -8,6 +8,8 @@ use App\Traits\AuthenticateUserTrait;
 use App\Http\Resources\User\AuthUserResource;
 use App\Http\Requests\Auth\UserRegistrationRequest;
 use App\Contracts\Repository\UserRepositoryInterface;
+use ErrorException;
+use Illuminate\Database\QueryException;
 
 class RegisterController extends Controller
 {
@@ -15,10 +17,22 @@ class RegisterController extends Controller
     
     public function register(UserRegistrationRequest $request, UserRepositoryInterface $user)
     {
-        $user = $user->create($request->validated());
-        $token = $this->authenticate($request);
-        $data = $user->userData($token);
+        try
+        {
+            $user = $user->create($request->validated());
+            $token = $this->authenticate($request);
+            $data = $user->userData($token);
+            
+            return response()->success('User successfully created!', $data);
+        } catch(QueryException $e)
+        {
+            report($e);
+            return response()->success('Registration failed due to a internal error!', $data);
+        } catch(ErrorException $e) 
+        {
+            report($e);
+            return response()->success('Registration failed due to a internal error!', $data);
+        }
         
-        return response()->success('You are logged in!', $data);
     }
 }
